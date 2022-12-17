@@ -22,11 +22,9 @@ const btnread = document.getElementById("btn-read");
 const btnupdate = document.getElementById("btn-update");
 const btndelete = document.getElementById("btn-delete");
 
-// user data
 
-// event listerner for create button
 btncreate.onclick = event => {
-  // insert values
+
   let flag = bulkcreate(db.etudiant, {
     nom: nom.value,
     prenoms: prenoms.value,
@@ -44,20 +42,16 @@ btncreate.onclick = event => {
   getMsg(flag, insertmsg);
 };
 
-// event listerner for create button
 btnread.onclick = table;
 
-// button update
 btnupdate.onclick = () => {
   const id = parseInt(userid.value || 0);
   if (id) {
-    // call dexie update method
     db.etudiant.update(id, {
       nom: nom.value,
       prenoms: prenoms.value,
       adresse: adresse.value
     }).then((updated) => {
-      // let get = updated ? `data updated` : `couldn't update data`;
       let get = updated ? true : false;
 
       // display message
@@ -68,7 +62,7 @@ btnupdate.onclick = () => {
       //console.log(get);
     })
   } else {
-    console.log(`Please Select id: ${id}`);
+    console.log(`Azafady mba m-selectioneva ID ray: ${id}`);
   }
 }
 
@@ -87,7 +81,6 @@ btndelete.onclick = () => {
 }
 
 window.onload = event => {
-  // set id textbox value
   textID(userid);
 };
 
@@ -161,12 +154,10 @@ function textID(textboxid) {
   });
 }
 
-// function msg
 function getMsg(flag, element) {
   if (flag) {
     // call msg 
     element.className += " movedown";
-
     setTimeout(() => {
       element.classList.forEach(classname => {
         classname == "movedown" ? undefined : element.classList.remove('movedown');

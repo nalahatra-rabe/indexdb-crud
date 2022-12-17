@@ -4,33 +4,27 @@ const studentdb = (dbname, table) => {
   db.open();
 
   return db;
-  /**
-       * const db = new Dexie('myDb');
-          db.version(1).stores({
-          friends: `name, age`
-      });
-       */
 };
 
 const bulkcreate = (dbtable, data) => {
   let flag = empty(data);
   if (flag) {
     dbtable.bulkAdd([data]);
-    console.log("data inserted successfully...!");
+
   } else {
-    console.log("Please provide data...!");
+    console.log("No data found...!");
   }
   return flag;
 };
 
-// create dynamic elements
+// add table elements
 const createEle = (tagname, appendTo, fn) => {
   const element = document.createElement(tagname);
   if (appendTo) appendTo.appendChild(element);
   if (fn) fn(element);
 };
 
-// check textbox validation
+// add checker
 const empty = object => {
   let flag = false;
   for (const value in object) {
@@ -43,18 +37,15 @@ const empty = object => {
   return flag;
 };
 
-// getData from the database
+// fetch db data
 const getData = (dbname, fn) => {
   let index = 0;
   let obj = {};
   dbname.count(count => {
-    // count rows in the table using count method
     if (count) {
       dbname.each(table => {
-        // table => return the table object data
-        // to arrange order we are going to create for in loop
         obj = SortObj(table);
-        fn(obj, index++); // call function with data argument
+        fn(obj, index++);
       });
     } else {
       fn(0);
